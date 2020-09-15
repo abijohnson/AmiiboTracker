@@ -1,0 +1,114 @@
+﻿@model AmiiboTracker.Models.Amiibo
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Amiibo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AmiiboSeries)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AmiiboSeries)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Character)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Character)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GameSeries)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GameSeries)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Head)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Head)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseAU)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseAU)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseEU)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseEU)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseJP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseJP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseNA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseNA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PK }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

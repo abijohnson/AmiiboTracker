@@ -1,0 +1,36 @@
+﻿@model IEnumerable<AmiiboTracker.Models.AmiiboUserBridge>
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Amiibo.AmiiboSeries)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsWishList)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amiibo.Image)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.PK }) |
+                @Html.ActionLink("Details", "Details", new { id = item.PK }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.PK })
+            </td>
+        </tr>
+    }
+
+</table>

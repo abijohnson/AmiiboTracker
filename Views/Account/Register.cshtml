@@ -1,0 +1,63 @@
+﻿@model AmiiboTracker.Models.RegisterViewModel
+
+<link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css2?family=BioRhyme&display=swap" rel="stylesheet">
+
+<body style="padding-top: 50px;
+    padding-bottom: 20px;
+    background-image: url(https://i.postimg.cc/Y0hqw2SK/amiibobg.png) ;
+    background-repeat: no-repeat;
+    background-size: cover;">
+
+    <div class="container" id="loginContainer">
+        <div class="row" id="loginPage">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6" id="loginFormCol">
+                <section id="loginForm">
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        <img src="https://i.postimg.cc/VLzPMkwY/amiibologo.png" style="width:400px ; height: 350px">
+                        @Html.AntiForgeryToken()
+                        <h3 id="loginText">Create a new account</h3>
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                        <div class="form-group" style=" margin-right: -30px; margin-left: -30px; ">
+                            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group" style=" margin-right: -30px; margin-left: -30px; ">
+                            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group" style=" margin-right: -30px; margin-left: -30px; ">
+                            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label", @style = "margin-top: -10px" })
+                            <div class="col-md-10">
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col" id="loginBtn">
+                                <input type="submit" class="btn btn-default" value="Register" />
+                            </div>
+                        </div>
+                        <p style="text-align:center ; ">
+                            @Html.ActionLink("Back to login", "Login")
+                        </p>
+                    }
+                </section>
+
+
+            </div>
+            <div class="col-sm-3"></div>
+
+        </div>
+    </div>
+
+    </body>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

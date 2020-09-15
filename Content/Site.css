@@ -1,0 +1,137 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    font-family: 'Varela Round', sans-serif;
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background-color: #9de4e6;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+#loginForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 400px;
+    font-family: 'BioRhyme', serif;
+}
+
+
+#loginFormCol {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    font-family: 'BioRhyme', serif;
+}
+
+#passTextLogin {
+    text-align: left;
+    font-family: 'BioRhyme', serif;
+}
+
+#emailTextLogin {
+    text-align: left;
+    font-family: 'BioRhyme', serif;
+}
+
+#loginBtn {
+    display: flex;
+    justify-content: space-around;
+    font-family: 'BioRhyme', serif;
+    border-radius: 20px ; 
+}
+
+#loginContainer {
+    background-color: #f5f4f0;
+    font-family: 'BioRhyme', serif;
+    border-radius: 30px;
+    width: 50%;
+    background-color: #f7f5ed;
+}
+
+#loginText {
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 40px;
+    font-size: 40px;
+}
+
+#regLink {
+    color: #9de4e6 ; 
+}
+
+#searchTable {
+    float: right;
+    font-family: 'Varela Round', sans-serif;
+}
+
+#amiiboName {
+    font-weight: bold;
+    font-size: 40px ; 
+}
+
+#amiiboSeries {
+
+}
+
+#releaseDate {
+    font-style: italic;
+
+}
+
+#nav-col {
+    list-style: none;
+    font-size: 35px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+#nav-col li {
+    list-style: none;
+    margin-top: 10px ; 
+    color: black ; 
+    float: left;
+    font-weight: bold; 
+    
+   
+}
+
+    #nav-col li a {
+        list-style: none;
+        margin-top: 10px;
+        color: black;
+        font-weight: bold;
+        display: block;
+        text-align: center;
+        text-decoration: none;
+    }
+
+#nav-link-row{
+    display: flex ; 
+    justify-content: space-around;
+}
+
