@@ -3,17 +3,21 @@
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
 <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=BioRhyme&display=swap" rel="stylesheet">
 
 <body>
     <div class="row" id="nav-link-row">
         <ul id="nav-col">
-            <li>
+            <li style="padding-left: 20px ; padding-right: 20px ;     font-family: 'BioRhyme', serif;">
+                <img src="https://i.postimg.cc/85qFfHWT/trackerlogo.png" style="width:150px ; height: 150px">
                 @Html.ActionLink("All Amiibos", "Index")
             </li>
-            <li>
+            <li style="padding-left: 20px ; padding-right: 20px ;    font-family: 'BioRhyme', serif; ">
+                <img src="https://i.postimg.cc/85qFfHWT/trackerlogo.png" style="width:150px ; height: 150px">
                 @Html.ActionLink("My Amiibos", "Index", "AmiiboUserBridge")
             </li>
-            <li>
+            <li style="padding-left: 20px ; padding-right: 20px ;     font-family: 'BioRhyme', serif;">
+                <img src="https://i.postimg.cc/85qFfHWT/trackerlogo.png" style="width:150px ; height: 150px">
                 @Html.ActionLink("My Wishlist", "Index", "AmiiboUserBridge")
             </li>
         </ul>
@@ -24,75 +28,87 @@
 
     @using (Html.BeginForm("Index", "Amiibos", FormMethod.Get))
     {
-        <p style="float: right; margin-left: 20px; font-size: 20px;">
+        <p style="float: right; margin-left: 20px; font-size: 20px; padding-top: 30px; font-weight: bold;">
             Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-            <input type="submit" value="Search" style="max-width: 480px; max-height: 100px; font-size: 18px; border-radius: 5px;" />
+            <input type="submit" value="Search" style="max-width: 480px;
+        max-height: 100px;
+        font-size: 22px;
+        border-radius: 5px;
+        background-color: #e27d5f ;
+        text-decoration: none ; 
+        border: none ; 
+" />
         </p>
     }
 
     <table class="table" border="0" id="searchTable">
         @for (int i = 0; i < Model.Count; i += 2)
         {
-        <tr>
-            <td>
-                <img src="@(Model[i].Image)" style="width: 250px ; height: 300px ; " />
-                <p id="amiiboName" style="font-size: 40px">@Model[i].Name</p>
-                <p id="amiiboSeries" style="font-size: 25px">@Model[i].GameSeries</p>
+            <tr id="amiiboRow">
+                <td id="amiiboCol1" style="        border-radius: 20px;
+">
+                    <img src="@(Model[i].Image)" style="width: 250px ; height: 300px ; " />
+                    <hr style="height: 5px" />
+                    <p id="amiiboName" style="font-size: 40px">@Model[i].Name</p>
+                    <p id="amiiboSeries" style="font-size: 25px">@Model[i].GameSeries</p>
 
-                @if (Model[i].ReleaseAU != null)
-                {
-                    <p id="releaseDate">Austrailia Release: @Model[i].ReleaseAU</p>
-                }
-
-                @if (Model[i].ReleaseNA != null)
-                {
-                    <p id="releaseDate">USA Release: @Model[i].ReleaseNA</p>
-                }
-                @if (Model[i].ReleaseEU != null)
-                {
-                    <p id="releaseDate">Europe Release: @Model[i].ReleaseEU</p>
-                }
-                @if (Model[i].ReleaseJP != null)
-                {
-                    <p id="releaseDate">Japan Release: @Model[i].ReleaseJP</p>
-                }
-
-            </td>
-
-            @if ((i + 1) < Model.Count())
-            {
-                <td>
-                    <img src="@(Model[i+1].Image)" style="width: 250px ; height: 300px ; " />
-                    <p id="amiiboName" style="font-size: 40px">@Model[i + 1].Name</p>
-                    <p id="amiiboSeries" style="font-size: 25px">@Model[i + 1].GameSeries</p>
-
-                    @if (Model[i + 1].ReleaseAU != null)
+                    @if (Model[i].ReleaseAU != null)
                     {
-                        <p id="releaseDate">Austrailia Release: @Model[i + 1].ReleaseAU</p>
+                        <p id="releaseDate">Austrailia Release: @Model[i].ReleaseAU</p>
                     }
 
-                    @if (Model[i + 1].ReleaseNA != null)
+                    @if (Model[i].ReleaseNA != null)
                     {
-                        <p id="releaseDate">USA Release: @Model[i + 1].ReleaseNA</p>
+                        <p id="releaseDate">USA Release: @Model[i].ReleaseNA</p>
                     }
-                    @if (Model[i + 1].ReleaseEU != null)
+                    @if (Model[i].ReleaseEU != null)
                     {
-                        <p id="releaseDate">Europe Release: @Model[i + 1].ReleaseEU</p>
+                        <p id="releaseDate">Europe Release: @Model[i].ReleaseEU</p>
                     }
-                    @if (Model[i + 1].ReleaseJP != null)
+                    @if (Model[i].ReleaseJP != null)
                     {
-                        <p id="releaseDate">Japan Release: @Model[i + 1].ReleaseJP</p>
+                        <p id="releaseDate">Japan Release: @Model[i].ReleaseJP</p>
                     }
 
                 </td>
-            }
 
-        </tr>
+                @if ((i + 1) < Model.Count())
+                {
+                    <td id="amiiboCol2" style="        border-radius: 20px;
+">
+                        <img src="@(Model[i+1].Image)" style="width: 250px ; height: 300px ; " />
+                        <hr />
+                        <p id="amiiboName" style="font-size: 40px">@Model[i + 1].Name</p>
+                        <p id="amiiboSeries" style="        font-size: 25px
+">@Model[i + 1].GameSeries</p>
+
+                        @if (Model[i + 1].ReleaseAU != null)
+                        {
+                            <p id="releaseDate">Austrailia Release: @Model[i + 1].ReleaseAU</p>
+                        }
+
+                        @if (Model[i + 1].ReleaseNA != null)
+                        {
+                            <p id="releaseDate">USA Release: @Model[i + 1].ReleaseNA</p>
+                        }
+                        @if (Model[i + 1].ReleaseEU != null)
+                        {
+                            <p id="releaseDate">Europe Release: @Model[i + 1].ReleaseEU</p>
+                        }
+                        @if (Model[i + 1].ReleaseJP != null)
+                        {
+                            <p id="releaseDate">Japan Release: @Model[i + 1].ReleaseJP</p>
+                        }
+
+                    </td>
+                }
+
+            </tr>
         }
-        </table>
+    </table>
 
-        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-        @Html.PagedListPager(Model, page => Url.Action("Index",
-            new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
 </body>
