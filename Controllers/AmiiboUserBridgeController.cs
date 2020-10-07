@@ -15,9 +15,30 @@ namespace AmiiboTracker.Controllers
     {
         private AmiiboContext db = new AmiiboContext();
 
+        private AmiiboUserBridge bridgeTable = new AmiiboUserBridge();
+
         // GET: AmiiboUserBridge
 
+        public void AddToWishList(int amiiboID)
+        {
+            if (!ControllerContext.IsChildAction)
+            {
+                var userID = db.AspNetUsers.FirstOrDefault(x => x.Email == System.Web.HttpContext.Current.User.Identity.Name).Id;
+                Amiibo amiibo2Save = db.Amiiboes.FirstOrDefault(y => y.PK == amiiboID); 
 
+                bridgeTable.AmiiboID = amiibo2Save.PK;
+                bridgeTable.UserID = userID;
+
+                bridgeTable.IsWishList = true;
+
+                db.AmiiboUserBridges.Add(bridgeTable);
+
+                db.SaveChanges();
+            }
+ 
+        }
+
+        [Authorize]
         public ActionResult Index()
         {
             var amiiboUserBridges = db.AmiiboUserBridges.Include(a => a.Amiibo).Include(a => a.AspNetUser);
@@ -25,6 +46,7 @@ namespace AmiiboTracker.Controllers
         }
 
         // GET: AmiiboUserBridge/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -40,6 +62,7 @@ namespace AmiiboTracker.Controllers
         }
 
         // GET: AmiiboUserBridge/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.AmiiboID = new SelectList(db.Amiiboes, "PK", "AmiiboSeries");
@@ -50,6 +73,7 @@ namespace AmiiboTracker.Controllers
         // POST: AmiiboUserBridge/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "PK,UserID,AmiiboID,IsWishList")] AmiiboUserBridge amiiboUserBridge)
@@ -67,6 +91,7 @@ namespace AmiiboTracker.Controllers
         }
 
         // GET: AmiiboUserBridge/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -86,6 +111,7 @@ namespace AmiiboTracker.Controllers
         // POST: AmiiboUserBridge/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "PK,UserID,AmiiboID,IsWishList")] AmiiboUserBridge amiiboUserBridge)
@@ -102,6 +128,7 @@ namespace AmiiboTracker.Controllers
         }
 
         // GET: AmiiboUserBridge/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -117,6 +144,7 @@ namespace AmiiboTracker.Controllers
         }
 
         // POST: AmiiboUserBridge/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -127,6 +155,7 @@ namespace AmiiboTracker.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         protected override void Dispose(bool disposing)
         {
             if (disposing)

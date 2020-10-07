@@ -150,7 +150,7 @@ textarea {
 
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
     text-align: center;
-    background-color: #f0f0f5;
+    background-color: #f5f4f0;
 }
 
 .table {
@@ -158,4 +158,40 @@ textarea {
     border-color: black;
 }
 
+
+#amiiboLink {
+    flex-direction: column;
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+    font-size: 35px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-family: 'BioRhyme', serif;
+    text-decoration: none;
+    color: #594d49; 
+}
+
+#amiiboLink a {
+    text-decoration: none;
+    color: #594d49;
+    font-weight: bold ; 
+}
+
+#addRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 30px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#wishButton, #haveButton {
+    background: none;
+    text-decoration: none;
+    border: none;
+    font-size: 35px;
+}
 

@@ -21,8 +21,9 @@ namespace AmiiboTracker.Controllers
     {
         private Amiibo db = new Amiibo();
 
-        private AmiiboContext context = new AmiiboContext(); 
+        private AmiiboContext context = new AmiiboContext();
 
+        [Authorize]
         public ActionResult Index()
         {
             //Checks to make sure we have data in the database 
@@ -37,16 +38,10 @@ namespace AmiiboTracker.Controllers
             return View();
         }
 
+        [Authorize]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
 
             return View();
         }

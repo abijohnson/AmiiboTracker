@@ -18,7 +18,7 @@ namespace AmiiboTracker.Controllers
 
         // GET: Amiibos
 
-
+        [Authorize]
         [HttpGet]
         public ActionResult Index(string searchString, string sortOrder, int? page, string currentFilter)
         {
@@ -81,7 +81,7 @@ namespace AmiiboTracker.Controllers
 
 
 
-        // GET: Amiibos/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -96,16 +96,11 @@ namespace AmiiboTracker.Controllers
             return View(amiibo);
         }
 
-        // GET: Amiibos/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
         // POST: Amiibos/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "PK,AmiiboSeries,Character,GameSeries,Head,Image,Name,ReleaseAU,ReleaseEU,ReleaseJP,ReleaseNA,Tail,Type")] Amiibo amiibo)
         {
@@ -119,6 +114,7 @@ namespace AmiiboTracker.Controllers
             return View(amiibo);
         }
 
+        [Authorize]
         // GET: Amiibos/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -138,6 +134,7 @@ namespace AmiiboTracker.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "PK,AmiiboSeries,Character,GameSeries,Head,Image,Name,ReleaseAU,ReleaseEU,ReleaseJP,ReleaseNA,Tail,Type")] Amiibo amiibo)
         {
@@ -150,7 +147,7 @@ namespace AmiiboTracker.Controllers
             return View(amiibo);
         }
 
-        // GET: Amiibos/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -176,6 +173,7 @@ namespace AmiiboTracker.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         protected override void Dispose(bool disposing)
         {
             if (disposing)
