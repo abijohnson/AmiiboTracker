@@ -5,6 +5,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=BioRhyme&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.8.10/themes/smoothness/jquery-ui.css" type="text/css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 
 <body>
     <div class="row" id="nav-link-row">
@@ -53,6 +55,7 @@
     <table class="table" border="0" id="searchTable">
         @for (int i = 0; i < Model.Count; i += 2)
         {
+
             <tr id="amiiboRow">
                 <td id="amiiboCol1" style="border-radius: 20px; width: 500px ;">
                     <img src="@(Model[i].Image)" style="width: 250px ; height: 300px ; " />
@@ -83,7 +86,7 @@
                             <button type="button" id="haveButton"><i class="far fa-check-circle"></i></button><p>I Have This</p>
                         </div>
                         <div class="col" style="width: 150px ;">
-                            <button type="button" id="wishButton" value="@Model[i].PK">
+                            <button type="button" class="wishButton" value="@Model[i].PK">
                                 <i class="far fa-heart"></i>
                             </button><p>I Want This</p>
                         </div>
@@ -93,46 +96,46 @@
 
                 @if ((i + 1) < Model.Count())
                 {
-            <td id="amiiboCol2" style="border-radius: 20px; width: 500px ;">
-                <img src="@(Model[i+1].Image)" style="width: 250px ; height: 300px ; " />
-                <hr />
-                <p id="amiiboName" style="font-size: 40px">@Model[i + 1].Name</p>
-                <p id="amiiboSeries" style="font-size: 25px">@Model[i + 1].GameSeries</p>
+                    <td id="amiiboCol2" style="border-radius: 20px; width: 500px ;">
+                        <img src="@(Model[i+1].Image)" style="width: 250px ; height: 300px ; " />
+                        <hr />
+                        <p id="amiiboName" style="font-size: 40px">@Model[i + 1].Name</p>
+                        <p id="amiiboSeries" style="font-size: 25px">@Model[i + 1].GameSeries</p>
 
-                @if (Model[i + 1].ReleaseAU != null)
-                {
-                    <p id="releaseDate">Austrailia Release: @Model[i + 1].ReleaseAU</p>
-                }
+                        @if (Model[i + 1].ReleaseAU != null)
+                        {
+                            <p id="releaseDate">Austrailia Release: @Model[i + 1].ReleaseAU</p>
+                        }
 
-                @if (Model[i + 1].ReleaseNA != null)
-                {
-                    <p id="releaseDate">USA Release: @Model[i + 1].ReleaseNA</p>
-                }
+                        @if (Model[i + 1].ReleaseNA != null)
+                        {
+                            <p id="releaseDate">USA Release: @Model[i + 1].ReleaseNA</p>
+                        }
 
-                @if (Model[i + 1].ReleaseEU != null)
-                {
-                    <p id="releaseDate">Europe Release: @Model[i + 1].ReleaseEU</p>
-                }
-                @if (Model[i + 1].ReleaseJP != null)
-                {
-                    <p id="releaseDate">Japan Release: @Model[i + 1].ReleaseJP</p>
-                }
-
-
-                <div class="row" id="addRow">
-                    <div class="col" style="width: 150px ;">
-                        <button type="button" id="haveButton"><i class="far fa-check-circle"></i></button><p>I Have This</p>
-                    </div>
-                    <div class="col" style="width: 150px ;">
-                        <button type="button" id="wishButton2" value="@Model[i + 1].PK">
-                            <i class="far fa-heart"></i>
-                        </button><p>I Want This</p>
-                    </div>
-                </div>
+                        @if (Model[i + 1].ReleaseEU != null)
+                        {
+                            <p id="releaseDate">Europe Release: @Model[i + 1].ReleaseEU</p>
+                        }
+                        @if (Model[i + 1].ReleaseJP != null)
+                        {
+                            <p id="releaseDate">Japan Release: @Model[i + 1].ReleaseJP</p>
+                        }
 
 
+                        <div class="row" id="addRow">
+                            <div class="col" style="width: 150px ;">
+                                <button type="button" id="haveButton"><i class="material-icons md-48">face</i></button><p>I Have This</p>
+                            </div>
+                            <div class="col" style="width: 150px ;">
+                                <button type="button" class="wishButton2" value="@Model[i + 1].PK">
+                                    <i class="far fa-heart"></i>
+                                </button><p>I Want This</p>
+                            </div>
+                        </div>
 
-            </td>
+
+
+                    </td>
                 }
 
             </tr>
@@ -153,46 +156,48 @@
 
 
 <script>
-$('#wishButton').click(function (e) {
+    $('.wishButton').click(function (e) {
+
+        e.preventDefault();
+
+        var selectedId = $(this).val();
+
  
-    e.preventDefault();
 
-    var selectedId = $('#wishButton').val();
+        $.ajax({
+            url: "/AmiiboUserBridge/AddToWishList",
+            type: "POST",
+            data: { amiiboId: selectedId },
+            success: function (data) {
 
-    $.ajax({
-        url: "/AmiiboUserBridge/AddToWishList",
-        type: "GET",
-        data: { amiiboId: selectedId },
-        success: function (data) {
-            if (data.status == "Success") {
-                alert("Done");
+                console.log(data);
+
+            },
+            error: function () {
+                alert("An error has occured!!!");
             }
-        },
-        error: function () {
-            alert("An error has occured!!!");
-        }
+        });
     });
-});
 
-    $('#wishButton2').click(function (e) {
- 
-    e.preventDefault();
+    $('.wishButton2').click(function (e) {
 
-    var selectedId = $('#wishButton2').val();
+        e.preventDefault();
 
-    $.ajax({
-        url: "/AmiiboUserBridge/AddToWishList",
-        type: "GET",
-        data: { amiiboId: selectedId },
-        success: function (data) {
-            if (data.status == "Success") {
-                alert("Done");
+        var selectedId = $(this).val();
+
+        $.ajax({
+            url: "/AmiiboUserBridge/AddToWishList",
+            type: "POST",
+            data: { amiiboId: selectedId },
+            success: function (data) {
+                if (data.status == "Success") {
+                    alert("Done");
+                }
+            },
+            error: function () {
+                alert("An error has occured!!!");
             }
-        },
-        error: function () {
-            alert("An error has occured!!!");
-        }
+        });
     });
-});
 </script>
 

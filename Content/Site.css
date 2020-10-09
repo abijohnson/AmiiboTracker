@@ -188,10 +188,16 @@ textarea {
     font-size: 20px;
 }
 
-#wishButton, #haveButton {
+.wishButton, #haveButton , .wishButton2{
     background: none;
     text-decoration: none;
     border: none;
     font-size: 35px;
 }
 
+ .wishButton2 {
+    background: blue ;
+    text-decoration: none;
+    border: none;
+    font-size: 35px;
+}
