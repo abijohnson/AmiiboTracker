@@ -86,8 +86,8 @@
                             <button type="button" id="haveButton"><i class="far fa-check-circle"></i></button><p>I Have This</p>
                         </div>
                         <div class="col" style="width: 150px ;">
-                            <button type="button" class="wishButton" value="@Model[i].PK">
-                                <i class="far fa-heart"></i>
+                            <button type="button" class="wishButton" value="@Model[i].PK" data-instance="@i">
+                                <i  id="wish_@i" class="far fa-heart"></i>
                             </button><p>I Want This</p>
                         </div>
                     </div>
@@ -128,7 +128,7 @@
                             </div>
                             <div class="col" style="width: 150px ;">
                                 <button type="button" class="wishButton2" value="@Model[i + 1].PK">
-                                    <i class="far fa-heart"></i>
+                                    <i id="wish_@(i+1)" class="far fa-heart"></i>
                                 </button><p>I Want This</p>
                             </div>
                         </div>
@@ -162,7 +162,16 @@
 
         var selectedId = $(this).val();
 
- 
+        var num2find = $(this).data().data; 
+
+        var id2find = "wish_" + num2find; 
+
+        var temp2 = parseInt(num2find); 
+
+        var temp = document.getElementById(id2find);
+
+
+
 
         $.ajax({
             url: "/AmiiboUserBridge/AddToWishList",
@@ -170,7 +179,10 @@
             data: { amiiboId: selectedId },
             success: function (data) {
 
-                console.log(data);
+                //console.log(data);
+
+                console.log(selectedId);
+                
 
             },
             error: function () {

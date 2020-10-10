@@ -26,16 +26,20 @@ namespace AmiiboTracker.Controllers
                 var userID = db.AspNetUsers.FirstOrDefault(x => x.Email == System.Web.HttpContext.Current.User.Identity.Name).Id;
                 Amiibo amiibo2Save = db.Amiiboes.FirstOrDefault(y => y.PK == amiiboID);
 
-                var sameRecord = db.AmiiboUserBridges.Any(x => x.IsWishList == true && x.UserID == userID && x.AmiiboID == amiibo2Save.PK) ;
+                var sameRecord = db.AmiiboUserBridges.Any(x => x.IsWishList == true && x.UserID == userID && x.AmiiboID == amiibo2Save.PK);
 
-                if (sameRecord == true )
+                if (sameRecord == false)
                 {
-                    var sameRecord2 = db.AmiiboUserBridges.Where(x => x.IsWishList == true && x.UserID == userID && x.AmiiboID == amiibo2Save.PK).FirstOrDefault();
+                    bridgeTable.AmiiboID = amiibo2Save.PK;
+                    bridgeTable.UserID = userID;
 
-                    db.AmiiboUserBridges.Remove(sameRecord2);
+                    bridgeTable.IsWishList = true;
+
+                    db.AmiiboUserBridges.Add(bridgeTable);
 
                     db.SaveChanges();
                 }
+
 
             }
  
@@ -45,17 +49,20 @@ namespace AmiiboTracker.Controllers
         {
             if (!ControllerContext.IsChildAction)
             {
+
                 var userID = db.AspNetUsers.FirstOrDefault(x => x.Email == System.Web.HttpContext.Current.User.Identity.Name).Id;
                 Amiibo amiibo2Save = db.Amiiboes.FirstOrDefault(y => y.PK == amiiboID);
 
-                bridgeTable.AmiiboID = amiibo2Save.PK;
-                bridgeTable.UserID = userID;
+                var sameRecord = db.AmiiboUserBridges.Any(x => x.IsWishList == true && x.UserID == userID && x.AmiiboID == amiibo2Save.PK);
 
-                bridgeTable.IsWishList = true;
+                if (sameRecord == true)
+                {
+                    var sameRecord2 = db.AmiiboUserBridges.Where(x => x.IsWishList == true && x.UserID == userID && x.AmiiboID == amiibo2Save.PK).FirstOrDefault();
 
-                db.AmiiboUserBridges.Remove(bridgeTable);
+                    db.AmiiboUserBridges.Remove(sameRecord2);
 
-                db.SaveChanges();
+                    db.SaveChanges();
+                }
             }
 
         }
